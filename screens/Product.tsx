@@ -1,10 +1,42 @@
 import React from "react";
-import { Text } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { gStyles } from "../components/Styles";
 
-export default function Product(): JSX.Element{
-    return(
-        <Text>
-            Product
-        </Text>
+export default function Product({ navigation }: any): JSX.Element {
+    return (
+        <ScrollView style={[gStyles.bgWhite, styles.productContainer]}>
+            <View style={[gStyles.margin, gStyles.marginTB, gStyles.center]}>
+                <Image style={[styles.productImage, gStyles.bRadius, gStyles.childMargin]} source={require('../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg')} />
+                <Text style={[gStyles.newProduct, styles.textCenter, gStyles.childMargin, gStyles.orange]}>NEW PRODUCT</Text>
+                <Text style={[gStyles.h1, gStyles.black, styles.textCenter]}>XX99 MARK |</Text>
+                <Text style={[gStyles.h1, gStyles.black, styles.textCenter, gStyles.childMargin]}>HEADPHONES</Text>
+                <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textCenter, gStyles.childMargin]}>Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move.</Text>
+                <TouchableOpacity style={gStyles.button} onPress={() => navigation.navigate('Cart')}>
+                    <Text style={[gStyles.white, styles.textCenter]}>ADD PRODUCT</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={[gStyles.margin, gStyles.marginTB]}>
+                <Text style={[gStyles.h2, gStyles.black]}>FEATURES</Text>
+                <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textLeft]}>These headphones have been created from durable, high-quality materials tough enough to take anywhere. Its compact folding design fuses comfort and minimalist style making it perfect for travel. Flawless transmission is assured by the latest wireless technology engineered for audio synchronization with videos.
+                    More than a simple pair of headphones, this headset features a pair of built-in microphones for clear, hands-free calling when paired with a compatible smartphone. Controlling music and calls is also intuitive thanks to easy-access touch buttons on the earcups. Regardless of how you use the XX59 headphones, you can do so all day thanks to an impressive 30-hour battery life that can be rapidly recharged via USB-C.</Text>
+            </View>
+        </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    productContainer: {
+        flex: 1,
+    },
+    productImage: {
+        height: 350,
+        width: 330
+    },
+    textCenter: {
+        textAlign: 'center'
+    },
+    textLeft: {
+        textAlign: 'justify'
+    }
+
+});

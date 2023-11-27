@@ -5,6 +5,7 @@ import Product from "../screens/Product";
 import Headphones from "../screens/Headphones";
 import Earphones from "../screens/Earphones";
 import Speakers from "../screens/Speakers";
+import { LogoIcon } from "../components/Icons";
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ const screenOptionStyles: any = {
 function HomeStackNavigator(): JSX.Element {
     return (
         <Stack.Navigator screenOptions={screenOptionStyles} >
-            <Stack.Screen name='StackHome' component={Home} options={{ title: 'Audiophile' }} />
+            <Stack.Screen name='StackHome' component={Home} options={{ headerTitle: () => <LogoIcon /> }} />
             <Stack.Screen name='Product' component={Product} />
         </ Stack.Navigator>
     );
