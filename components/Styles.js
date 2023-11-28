@@ -19,11 +19,10 @@ const gStyles = StyleSheet.create({
     },
     h3: {
         fontSize: 16,
-        fontWeight: '500',
+        fontWeight: '400',
     },
     h4: {
-        fontSize: 8,
-        fontWeight: '400',
+        fontSize: 16,
     },
     margin: {
         marginHorizontal: 25,
@@ -78,6 +77,9 @@ const gStyles = StyleSheet.create({
     },
     greyOnWhite: {
         color: COLORS.greyOnWhite,
+    }, 
+    flex: {
+        flexDirection: 'row',
     }
 });
 
