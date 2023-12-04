@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { gStyles } from "../components/Styles";
 import ProductCard from "../components/ProductCard";
+import Btn from "../components/Button";
 
 export default function Home({ navigation }: any): JSX.Element {
     return (
@@ -19,9 +20,7 @@ export default function Home({ navigation }: any): JSX.Element {
                     <Text style={[styles.white, gStyles.childMargin, gStyles.h1]}>XX99 MARK II</Text>
                     <Text style={[styles.white, gStyles.childMargin, gStyles.h1]}>HEADPHONES</Text>
                     <Text style={[styles.white, gStyles.childMargin, gStyles.grey, gStyles.para]}>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</Text>
-                    <TouchableOpacity style={gStyles.button} onPress={() => navigation.navigate('Product')}>
-                        <Text style={styles.white}>SEE PRODUCT</Text>
-                    </TouchableOpacity>
+                    <Btn text="SEE PRODCUT" navigation={navigation} link="Product" />
                 </View>
             </ImageBackground>
             <View style={styles.productsContainer}>

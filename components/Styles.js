@@ -79,6 +79,7 @@ const gStyles = StyleSheet.create({
         color: COLORS.greyOnWhite,
     }, 
     flex: {
+        flex: 1,
         flexDirection: 'row',
     }
 });

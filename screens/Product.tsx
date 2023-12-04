@@ -1,20 +1,20 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../components/Styles";
+import Products from "../components/Products";
 
 export default function Product({ navigation }: any): JSX.Element {
     return (
         <ScrollView style={[gStyles.bgWhite, styles.productContainer]}>
-            <View style={[gStyles.margin, gStyles.marginTB, gStyles.center]}>
-                <Image style={[styles.productImage, gStyles.bRadius, gStyles.childMargin]} source={require('../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg')} />
-                <Text style={[gStyles.newProduct, styles.textCenter, gStyles.childMargin, gStyles.orange]}>NEW PRODUCT</Text>
-                <Text style={[gStyles.h1, gStyles.black, styles.textCenter]}>XX99 MARK |</Text>
-                <Text style={[gStyles.h1, gStyles.black, styles.textCenter, gStyles.childMargin]}>HEADPHONES</Text>
-                <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textCenter, gStyles.childMargin]}>Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move.</Text>
-                <TouchableOpacity style={gStyles.button} onPress={() => navigation.navigate('Cart')}>
-                    <Text style={[gStyles.white, styles.textCenter]}>ADD PRODUCT</Text>
-                </TouchableOpacity>
-            </View>
+            <Products 
+            id={0}
+            name="XX99 MARK I" 
+            price={2999}
+            cart={true} 
+            src={require("../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg")} 
+            desc="Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move." 
+            navigation={navigation}
+            link="Cart" />
             <View style={[gStyles.margin]}>
                 <Text style={[gStyles.h2, gStyles.black, gStyles.childMargin]}>FEATURES</Text>
                 <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textLeft, gStyles.childMargin]}>These headphones have been created from durable, high-quality materials tough enough to take anywhere. Its compact folding design fuses comfort and minimalist style making it perfect for travel. Flawless transmission is assured by the latest wireless technology engineered for audio synchronization with videos.</Text>

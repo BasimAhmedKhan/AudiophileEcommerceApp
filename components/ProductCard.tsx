@@ -24,6 +24,5 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: 160,
-        // backgroundColor: 'wheat'
     },
 });
