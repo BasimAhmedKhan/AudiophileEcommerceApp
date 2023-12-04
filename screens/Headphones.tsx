@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, Text, View, StyleSheet, FlatList } from "react-native";
+import { ActivityIndicator, View, StyleSheet, FlatList } from "react-native";
 import Products from "../components/Products";
-import { gStyles } from "../components/Styles";
+import { COLORS, gStyles } from "../components/Styles";
 
 type Product = {
     id: number;
     name: string;
     price: number;
     description: string;
+    image: {
+        mobile: string;
+    }
+    slug: string;
+    category: string;
 };
 
 export default function Headphones({ navigation }: any): JSX.Element {
@@ -32,9 +37,9 @@ export default function Headphones({ navigation }: any): JSX.Element {
     }, []);
 
     return (
-        <ScrollView style={[gStyles.bgWhite, styles.productContainer]}>
+        <View style={[gStyles.bgWhite, styles.productContainer]}>
             {isLoading ?
-                <ActivityIndicator /> :
+                <ActivityIndicator size="large" style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }], marginVertical: 300  }} color={COLORS.orange} /> :
                 <FlatList
                     data={data}
                     keyExtractor={(item) => item.id.toString()}
@@ -44,13 +49,15 @@ export default function Headphones({ navigation }: any): JSX.Element {
                             name={item.name}
                             price={item.price}
                             cart={false}
-                            src={require("../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg")}
+                            src={item.image.mobile}
                             desc={item.description}
                             navigation={navigation}
-                            link="Cart"
+                            link="Product"
+                            slug={item.slug}
+                            category={item.category}
                         />}
                 />}
-        </ScrollView>
+        </View>
     );
 }
 

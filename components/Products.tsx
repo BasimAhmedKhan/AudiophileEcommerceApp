@@ -7,14 +7,16 @@ type ProductsProps = {
     id: number
     name: string
     price: number
-    desc:  string
+    desc: string
     cart: boolean
     src: any
     link: string
     navigation: Object
+    slug: string
+    category: string
 };
 
-export default function Products({ id, name, price, desc, cart, src, link, navigation }: ProductsProps): JSX.Element {
+export default function Products({ id, name, price, desc, cart, src, link, navigation, slug, category }: ProductsProps): JSX.Element {
 
     const [counter, setCounter] = useState(0);
 
@@ -27,10 +29,11 @@ export default function Products({ id, name, price, desc, cart, src, link, navig
 
     return (
         <View style={[gStyles.margin, gStyles.marginTB, gStyles.center]}>
-            <Image style={[styles.productImage, gStyles.bRadius, gStyles.childMargin]} source={src} />
+            <Image style={[styles.productImage, gStyles.bRadius, gStyles.childMargin]} source={{
+                uri: `https://audiophile-murex.vercel.app/${src}`,
+            }} />
             <Text style={[gStyles.newProduct, styles.textCenter, gStyles.childMargin, gStyles.orange]}>NEW PRODUCT</Text>
-            <Text style={[gStyles.h1, gStyles.black, styles.textCenter]}>{name}</Text>
-            <Text style={[gStyles.h1, gStyles.black, styles.textCenter, gStyles.childMargin]}>HEADPHONES</Text>
+            <Text style={[gStyles.h1, gStyles.black, styles.textCenter, gStyles.childMargin, styles.title]}>{name}</Text>
             <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textCenter, gStyles.childMargin]}>{desc}</Text>
             {cart ? <Text style={[gStyles.h3, gStyles.black, styles.textCenter, gStyles.childMargin]} >$ {price}</Text> : null}
             <View style={[gStyles.flex, gStyles.margin]}>
@@ -44,7 +47,7 @@ export default function Products({ id, name, price, desc, cart, src, link, navig
                             <Text>+</Text>
                         </TouchableOpacity>
                     </View> : null}
-                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} navigation={navigation} link={link} />
+                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} navigation={navigation} link={link} slug={slug} category={category} />
             </View>
         </View>
     );
@@ -68,5 +71,8 @@ const styles = StyleSheet.create({
     },
     marginRight: {
         marginRight: 30,
+    },
+    title: {
+        width: 205
     }
 });

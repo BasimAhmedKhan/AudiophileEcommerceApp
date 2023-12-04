@@ -1,50 +1,109 @@
-import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { gStyles } from "../components/Styles";
+import { Image, ScrollView, StyleSheet, Text, View, ActivityIndicator, FlatList } from "react-native";
+import { gStyles, COLORS } from "../components/Styles";
 import Products from "../components/Products";
+import { useState, useEffect } from "react";
 
-export default function Product({ navigation }: any): JSX.Element {
+type Product = {
+    id: number;
+    name: string;
+    price: number;
+    description: string;
+    features: string;
+    includes: [
+        {
+            quantity: number;
+            item: string;
+        }
+    ];
+    image: {
+        mobile: string;
+    },
+    gallery: {
+        first: {mobile: string},
+        second: {mobile: string},
+        third: {mobile: string},
+    },
+};
+
+export default function Product({ navigation, route }: any): JSX.Element {
+    const { slug, category } = route.params;
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState<Product>({
+        id: 0,
+        name: "",
+        price: 0,
+        description: "",
+        features: "",
+        includes: [{
+            quantity: 0,
+            item: "",
+        }],
+        image: {
+            mobile: "",
+        },
+        gallery: {
+            first: {mobile: ""},
+            second: {mobile: ""},
+            third: {mobile: ""},
+        },
+    });
+
+    const getData = async () => {
+        try {
+            const response = await fetch(`https://audiophile-murex.vercel.app/api/products/${category}/${slug}`,);
+            const res = await response.json();
+            setData(res);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const includes = data.includes.map((e, i) => {
+        return (
+            <View key={i} style={[gStyles.flex, gStyles.childMargin]}>
+                <Text style={[gStyles.orange, gStyles.h3]}>{e.quantity}x  </Text>
+                <Text style={[gStyles.h4, gStyles.greyOnWhite]}>{e.item}</Text>
+            </View>
+        );
+    });
+
     return (
         <ScrollView style={[gStyles.bgWhite, styles.productContainer]}>
-            <Products 
-            id={0}
-            name="XX99 MARK I" 
-            price={2999}
-            cart={true} 
-            src={require("../assets/product-xx99-mark-one-headphones/mobile/image-product.jpg")} 
-            desc="Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move." 
-            navigation={navigation}
-            link="Cart" />
-            <View style={[gStyles.margin]}>
-                <Text style={[gStyles.h2, gStyles.black, gStyles.childMargin]}>FEATURES</Text>
-                <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textLeft, gStyles.childMargin]}>These headphones have been created from durable, high-quality materials tough enough to take anywhere. Its compact folding design fuses comfort and minimalist style making it perfect for travel. Flawless transmission is assured by the latest wireless technology engineered for audio synchronization with videos.</Text>
-                <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textLeft]}>More than a simple pair of headphones, this headset features a pair of built-in microphones for clear, hands-free calling when paired with a compatible smartphone. Controlling music and calls is also intuitive thanks to easy-access touch buttons on the earcups. Regardless of how you use the XX59 headphones, you can do so all day thanks to an impressive 30-hour battery life that can be rapidly recharged via USB-C.</Text>
-            </View>
-            <View style={[gStyles.margin, gStyles.marginTB]}>
-                <Text style={[gStyles.h2, gStyles.black, gStyles.childMargin]}>IN THE BOX</Text>
-                <View style={[gStyles.flex, gStyles.childMargin]}>
-                    <Text style={[gStyles.orange, gStyles.h3]}>1x  </Text>
-                    <Text style={[gStyles.h4, gStyles.greyOnWhite]}>Headphone Unit</Text>
+            {isLoading ?
+                <ActivityIndicator size="large" style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }], marginVertical: 300 }} color={COLORS.orange} /> :
+                <View>
+                    <Products
+                        id={data.id}
+                        name={data.name}
+                        price={data.price}
+                        cart={true}
+                        src={data.image.mobile}
+                        desc={data.description}
+                        navigation={navigation}
+                        link="Cart"
+                        slug=""
+                        category="" />
+                    <View style={[gStyles.margin]}>
+                        <Text style={[gStyles.h2, gStyles.black, gStyles.childMargin]}>FEATURES</Text>
+                        <Text style={[gStyles.para, gStyles.greyOnWhite, styles.textLeft, gStyles.childMargin]}>{data.features}</Text>
+                    </View>
+                    <View style={[gStyles.margin, gStyles.childMargin]}>
+                        <Text style={[gStyles.h2, gStyles.black, gStyles.childMargin]}>IN THE BOX</Text>
+                        {includes}
+                    </View>
+                    <View style={[gStyles.margin, styles.gallery, gStyles.marginTB, gStyles.center]}>
+                        <Image resizeMode="cover" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100,
+                        styles.width25]} source={{ uri: `https://audiophile-murex.vercel.app${data.gallery.first.mobile}`}} />
+                        <Image resizeMode="contain" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100, styles.width25]} source={{ uri: `https://audiophile-murex.vercel.app${data.gallery.second.mobile}`}} />
+                        <Image resizeMode="contain" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100, styles.width50]} source={{ uri: `https://audiophile-murex.vercel.app${data.gallery.third.mobile}`}} />
+                    </View>
                 </View>
-                <View style={[gStyles.flex, gStyles.childMargin]}>
-                    <Text style={[gStyles.orange, gStyles.h3]}>1x  </Text>
-                    <Text style={[gStyles.h4, gStyles.greyOnWhite]}>Headphone Unit</Text>
-                </View>
-                <View style={[gStyles.flex, gStyles.childMargin]}>
-                    <Text style={[gStyles.orange, gStyles.h3]}>1x  </Text>
-                    <Text style={[gStyles.h4, gStyles.greyOnWhite]}>Headphone Unit</Text>
-                </View>
-                <View style={[gStyles.flex, gStyles.childMargin]}>
-                    <Text style={[gStyles.orange, gStyles.h3]}>1x  </Text>
-                    <Text style={[gStyles.h4, gStyles.greyOnWhite]}>Headphone Unit</Text>
-                </View>
-            </View>
-            <View style={[gStyles.margin, styles.gallery, gStyles.marginTB, gStyles.center]}>
-                <Image resizeMode="cover" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100,
-                styles.width25]} source={require('../assets/product-xx99-mark-one-headphones/mobile/image-gallery-1.jpg')} />
-                <Image resizeMode="contain" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100, styles.width25]} source={require('../assets/product-xx99-mark-one-headphones/mobile/image-gallery-2.jpg')} />
-                <Image resizeMode="contain" style={[gStyles.bRadius, gStyles.childMargin, gStyles.width100, styles.width50]} source={require('../assets/product-xx99-mark-one-headphones/mobile/image-gallery-3.jpg')} />
-            </View>
+            }
         </ScrollView>
     );
 }

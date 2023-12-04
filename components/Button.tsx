@@ -1,9 +1,13 @@
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { COLORS } from "./Styles";
 
-export default function Btn({ text, link, navigation }: any): JSX.Element {
+export default function Btn({ text, link, navigation, slug, category }: any): JSX.Element {
     return (
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate(link)}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate(link, {
+            slug: slug,
+            category: category,
+        })}
+        >
             <Text style={styles.white}>{text}</Text>
         </TouchableOpacity>
     );
