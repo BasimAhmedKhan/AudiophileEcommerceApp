@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet, FlatList } from "react-native";
 import Products from "../components/Products";
 import { COLORS, gStyles } from "../components/Styles";

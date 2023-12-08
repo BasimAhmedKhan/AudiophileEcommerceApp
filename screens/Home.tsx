@@ -5,7 +5,6 @@ import {
     View, Dimensions,
     ScrollView,
     ActivityIndicator,
-    FlatList
 } from "react-native";
 import { gStyles, COLORS } from "../components/Styles";
 import ProductCard from "../components/ProductCard";
@@ -44,6 +43,20 @@ export default function Home({ navigation }: any): JSX.Element {
         getData();
     }, []);
 
+    const products = data.map((e) => {
+        return (
+            <ProductCard
+                key={e.id}
+                name={e.name}
+                price={e.price}
+                slug={e.slug}
+                category={e.category}
+                img={e.image.mobile}
+                navigation={navigation}
+            />
+        );
+    });
+
     return (
         <ScrollView style={styles.container}>
             <ImageBackground source={require('../assets/home/mobile/image-hero.jpg')} resizeMode="cover" style={styles.Imagecontainer}>
@@ -59,18 +72,10 @@ export default function Home({ navigation }: any): JSX.Element {
                 <Text style={[gStyles.h2, gStyles.margin, gStyles.black, gStyles.marginTB]}>POPULAR</Text>
                 <View style={[gStyles.margin, styles.cardContainer]}>
                     {isLoading ?
-                        <ActivityIndicator size="large" style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }], marginVertical: 300 }} color={COLORS.orange} /> :
-                        <FlatList 
-                        data={data}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => <ProductCard 
-                            name={item.name}
-                            price={item.price}
-                            slug={item.slug}
-                            category={item.category}
-                            img={item.image.mobile}
-                            />}
-                        />
+                        <View style={[gStyles.center]}>
+                            <ActivityIndicator size="large" style={{ transform: [{ scaleX: 2 }, { scaleY: 2 }], marginVertical: 300 }} color={COLORS.orange} />
+                        </View>
+                        : products
                     }
                 </View>
             </View>
@@ -100,6 +105,6 @@ const styles = StyleSheet.create({
     cardContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
 });

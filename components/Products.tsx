@@ -42,7 +42,9 @@ export default function Products({ id, name, price, desc, cart, src, link, navig
                         <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={decrease}>
                             <Text>-</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.counter, gStyles.center]}><Text style={[gStyles.black, gStyles.h3]}>{counter}</Text></TouchableOpacity>
+                        <TouchableOpacity style={[styles.counter, gStyles.center]}>
+                            <Text style={[gStyles.black, gStyles.h3]}>{counter}</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={increase}>
                             <Text>+</Text>
                         </TouchableOpacity>

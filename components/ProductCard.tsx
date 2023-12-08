@@ -3,17 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
 import { gStyles } from "./Styles";
 
-// type ProductCardProps = {
-//     name: string;
-//     price: number;
-//     navigation: {
-//         navigate: Function;
-//     };
-//     slug: string;
-//     category: string;
-//     img: string;
-// }
-
 export default function ProductCard({ name, price, navigation, slug, category, img }: any): JSX.Element{
     return(
         <TouchableOpacity style={[styles.cardContainer, gStyles.bRadius, gStyles.childMargin]} onPress={() => navigation.navigate('Product', {
@@ -22,11 +11,12 @@ export default function ProductCard({ name, price, navigation, slug, category, i
         })}>
             <Image style={[styles.productImage, gStyles.bRadius, gStyles.width100]} source={{uri: `https://audiophile-murex.vercel.app/${img}`}} />
             <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around'
+                justifyContent: 'space-between',
+                padding: 6
             }}>
-                <Text style={[gStyles.black, gStyles.h3]}>{name}</Text>
-                <Text style={[gStyles.black, gStyles.h3]}>$ {price}</Text>
+                <Text style={[gStyles.black, gStyles.h3]}> {name.substring(0, 3)}</Text>
+                <Text style={[gStyles.black, gStyles.h3]}>{name.substring(4)}</Text>
+                <Text style={[gStyles.orange, gStyles.h3, styles.price]}>$ {price}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -37,6 +27,11 @@ const styles = StyleSheet.create({
         height: 150,
     },
     cardContainer: {
-        width: 160,
+        width: 165,  
+        backgroundColor: '#f1f1f1',
     },
+    price: {
+        textAlign: 'right',
+        fontWeight: 'bold'
+    }
 });

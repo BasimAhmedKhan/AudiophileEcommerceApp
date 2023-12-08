@@ -25,7 +25,7 @@ const gStyles = StyleSheet.create({
         fontSize: 16,
     },
     margin: {
-        marginHorizontal: 25,
+        marginHorizontal: 22,
     },
     childMargin: {
         marginBottom: 20,
@@ -81,6 +81,9 @@ const gStyles = StyleSheet.create({
     flex: {
         flex: 1,
         flexDirection: 'row',
+    },
+    childPadding: {
+        padding: 10,
     }
 });
 
