@@ -1,4 +1,4 @@
-import { Image, ScrollView, StyleSheet, Text, View, ActivityIndicator, FlatList } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { gStyles, COLORS } from "../components/Styles";
 import Products from "../components/Products";
 import { useState, useEffect } from "react";

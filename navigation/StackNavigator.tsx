@@ -20,7 +20,7 @@ const screenOptionStyles: any = {
 function HomeStackNavigator(): JSX.Element {
     return (
         <Stack.Navigator screenOptions={screenOptionStyles} >
-            <Stack.Screen name='StackHome' component={Home} options={{ headerTitle: () => <LogoIcon /> }} />
+            <Stack.Screen name='StackHome' component={Home} options={{ headerTitle: LogoIcon }} />
             <Stack.Screen name='Product' component={Product} />
         </ Stack.Navigator>
     );

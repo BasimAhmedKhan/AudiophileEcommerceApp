@@ -49,7 +49,7 @@ export default function Products({ id, name, price, desc, cart, src, link, navig
                             <Text>+</Text>
                         </TouchableOpacity>
                     </View> : null}
-                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} navigation={navigation} link={link} slug={slug} category={category} />
+                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} navigation={navigation} link={link} slug={slug} category={category} size={true} />
             </View>
         </View>
     );
@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
         marginRight: 30,
     },
     title: {
-        width: 205
+        width: 205,
+        flex: 1,
+        flexWrap: 'nowrap',
     }
 });

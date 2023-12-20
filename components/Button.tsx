@@ -1,9 +1,9 @@
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { COLORS } from "./Styles";
 
-export default function Btn({ text, link, navigation, slug, category }: any): JSX.Element {
+export default function Btn({ text, link, navigation, slug, category, size }: any): JSX.Element {
     return (
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate(link, {
+        <TouchableOpacity style={[styles.button, size?styles.heightL:styles.heightS]} onPress={() => navigation.navigate(link, {
             slug: slug,
             category: category,
         })}
@@ -19,9 +19,15 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     button: {
-        height: 40,
-        width: 130,
         backgroundColor: COLORS.orange,
         justifyContent: 'center'
     },
+    heightS: {
+        height: 30,
+        width: 120,
+    },
+    heightL: {
+        height: 40,
+        width: 130,
+    }
 });

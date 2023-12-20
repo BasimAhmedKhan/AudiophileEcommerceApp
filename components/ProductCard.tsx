@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
-import { gStyles } from "./Styles";
+import { COLORS, gStyles } from "./Styles";
 
 export default function ProductCard({ name, price, navigation, slug, category, img }: any): JSX.Element{
     return(
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: 165,  
-        backgroundColor: '#f1f1f1',
+        backgroundColor: COLORS.greyBg,
     },
     price: {
         textAlign: 'right',

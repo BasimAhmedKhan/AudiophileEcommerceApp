@@ -5,7 +5,8 @@ const COLORS = {
     white: 'white',
     grey: 'rgba(255,255,255,0.5)',
     greyOnWhite: 'rgba(0,0,0,0.5)',
-    orange: 'hsl(22, 64%, 57%)'
+    orange: 'hsl(22, 64%, 57%)',
+    greyBg: '#f1f1f1',
 };
 
 const gStyles = StyleSheet.create({
@@ -18,7 +19,7 @@ const gStyles = StyleSheet.create({
         fontWeight: '500',
     },
     h3: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: '400',
     },
     h4: {
