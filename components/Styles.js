@@ -32,7 +32,7 @@ const gStyles = StyleSheet.create({
         marginBottom: 20,
     },
     button: {
-        height: 35,
+        height: 40,
         width: 130,
         backgroundColor: COLORS.orange,
         justifyContent: 'center'
@@ -85,6 +85,9 @@ const gStyles = StyleSheet.create({
     },
     childPadding: {
         padding: 10,
+    },
+    textCenter: {
+        textAlign: 'center',
     }
 });
 

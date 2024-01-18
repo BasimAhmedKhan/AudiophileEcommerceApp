@@ -61,20 +61,11 @@ export default function Home({ navigation }: any): JSX.Element {
 
     return (
         <ScrollView style={styles.container}>
-            {/* <ImageBackground source={require('../assets/home/mobile/image-hero.jpg')} resizeMode="contain" style={styles.Imagecontainer}>
-                <View style={[gStyles.center, gStyles.margin]}>
-                    <Text style={[styles.white, gStyles.childMargin, gStyles.newProduct, gStyles.grey]}>NEW PRODUCT</Text>
-                    <Text style={[styles.white, gStyles.childMargin, gStyles.h1]}>XX99 MARK II</Text>
-                    <Text style={[styles.white, gStyles.childMargin, gStyles.h1]}>HEADPHONES</Text>
-                    <Text style={[styles.white, gStyles.childMargin, gStyles.grey, gStyles.para]}>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</Text>
-                    <Btn text="SEE PRODCUT" navigation={navigation} link="Product" slug={"xx99-mark-two-headphones"} category={'headphones'} size={true} />
-                </View>
-            </ImageBackground> */}
             <View style={styles.productsContainer}>
                 <ImageBackground source={require('../assets/home/mobile/image-speaker-zx7-pano.jpg')} resizeMode="cover" style={[gStyles.margin, styles.zx7Image, gStyles.marginTB]} imageStyle={[gStyles.bRadius]}>
                     <View style={[gStyles.center, gStyles.margin, styles.zx7Child]}>
                     <Text style={[gStyles.childMargin, gStyles.h3, gStyles.black]}>ZX7 SPEAKERS</Text>
-                    <Btn text="SEE PRODCUT" navigation={navigation} link="Product" slug={"zx7-speakers"} category={'speakers'} size={false} />
+                    <Btn text="SEE PRODCUT" navigation={navigation} link="Product" slug={"zx7-speaker"} category={'speakers'} size={false} />
                     </View>
                 </ImageBackground>
             </View>
