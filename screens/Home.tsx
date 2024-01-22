@@ -12,6 +12,7 @@ import ProductCard from "../components/ProductCard";
 import Btn from "../components/Button";
 import { useState, useEffect } from "react";
 import { EarphoneIcon, HeadphoneIcon, SpeakerIcon } from "../components/Icons";
+import { useAuth } from "../context/AuthContext";
 
 type Product = {
     id: number;
@@ -29,11 +30,12 @@ export default function Home({ navigation }: any): JSX.Element {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState<Product[]>([]);
 
+    const { authAxios } = useAuth();
+
     const getData = async () => {
         try {
-            const response = await fetch('https://audiophile-murex.vercel.app/api/products',);
-            const res = await response.json();
-            setData(res);
+            const response = await authAxios.get('https://audiophile-murex.vercel.app/api/products',);
+            setData(response.data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -43,6 +45,14 @@ export default function Home({ navigation }: any): JSX.Element {
 
     useEffect(() => {
         getData();
+        // (async () => {
+        //     try {
+        //         const res = await authAxios.get('http://192.168.81.40:3001/')
+        //         console.log('protected route', res.data)
+        //     } catch (e) {
+        //         console.log('e', e);
+        //     }
+        // })()
     }, []);
 
     const products = data.map((e) => {

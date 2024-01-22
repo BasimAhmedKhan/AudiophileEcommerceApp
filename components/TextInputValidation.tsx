@@ -1,5 +1,5 @@
-import { TextInput, View, Text } from "react-native";
-import { useState } from "react";
+import { TextInput, View, Text, type TextInputProps } from "react-native";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { COLORS, gStyles } from "./Styles";
 
 type TextInputValidaionProps = {
@@ -7,10 +7,9 @@ type TextInputValidaionProps = {
     errorMessage: string;
     placeholder: string;
     setValidation: Function;
-}
+} & TextInputProps
 
-
-export default function TextInputValidaion({ regex, errorMessage, placeholder, setValidation }: TextInputValidaionProps): JSX.Element {
+const TextInputValidaion = forwardRef(({ regex, errorMessage, placeholder, setValidation, ...props }: TextInputValidaionProps, ref) => {
 
     const [text, setText] = useState("");
     const [validationMessage, setValidationMessage] = useState("");
@@ -19,6 +18,15 @@ export default function TextInputValidaion({ regex, errorMessage, placeholder, s
         setValidation(isValid);
         isValid ? setValidationMessage("") : setValidationMessage(errorMessage);
     };
+
+    useImperativeHandle(ref, () => {
+        return {
+            getValue: () => {
+                return text;
+            },
+        }
+    })
+
     return (
         <View>
             <TextInput
@@ -28,10 +36,13 @@ export default function TextInputValidaion({ regex, errorMessage, placeholder, s
                 onChangeText={setText}
                 onEndEditing={() => validate(text)}
                 placeholder={placeholder}
+                {...props}
             />
             <Text style={{color: 'red'}}>{validationMessage}</Text>
         </View>
 
     );
-}
+});
+
+export default TextInputValidaion;
 

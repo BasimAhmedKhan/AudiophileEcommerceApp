@@ -12,18 +12,22 @@ const COLORS = {
 const gStyles = StyleSheet.create({
     h1: {
         fontSize: 36,
+        color: 'black',
         fontWeight: '500',
-    },
+},
     h2: {
         fontSize: 26,
+        color: 'black',
         fontWeight: '500',
     },
     h3: {
         fontSize: 20,
+        color: 'black',
         fontWeight: '400',
     },
     h4: {
         fontSize: 16,
+        color: 'black',
     },
     margin: {
         marginHorizontal: 22,

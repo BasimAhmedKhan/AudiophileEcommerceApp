@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import { gStyles, COLORS } from "../components/Styles";
 import TextInputValidaion from "../components/TextInputValidation";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login({ navigation }: any): JSX.Element {
-
-    const { setIsLogin } : any = useAuth();
+export default function Login({ navigation }) {
+    
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const { login } = useAuth();
     const [validation, setValidation] = useState(false);
+
+    function onSubmit() {
+        const email = emailRef.current?.getValue();
+        const password = passwordRef.current?.getValue();
+        login(email, password);
+    }
 
     return (
         <View style={[styles.container]}>
@@ -24,18 +32,23 @@ export default function Login({ navigation }: any): JSX.Element {
                                 placeholder={" johnDoe@gmail.com"}
                                 errorMessage="Please provide a valid email!"
                                 setValidation={setValidation}
+                                ref={emailRef}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
                             />
                         </View>
                         <View style={gStyles.childMargin}>
                             <Text style={[gStyles.black, gStyles.h3, gStyles.childMargin]}>Password</Text>
                             <TextInputValidaion
-                                regex={/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[\s\S]{6,}$/}
+                                regex={/.*/}
                                 placeholder={" ********"}
                                 errorMessage="You're password must contain 1 uppercase letter, 1 number and atleast 6 length"
                                 setValidation={setValidation}
+                                ref={passwordRef}
+                                secureTextEntry
                             />
                         </View>
-                        <TouchableOpacity style={[gStyles.button, gStyles.bRadius, gStyles.childMargin, gStyles.width100]} onPress={() => {navigation.navigate('SignUp'); setIsLogin(false);}}>
+                        <TouchableOpacity style={[gStyles.button, gStyles.bRadius, gStyles.childMargin, gStyles.width100]} onPress={onSubmit}>
                             <Text style={[gStyles.white, gStyles.textCenter, gStyles.h3]}>Login</Text>
                         </TouchableOpacity>
                         <View style={{ alignItems: 'center' }}>

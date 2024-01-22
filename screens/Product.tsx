@@ -85,7 +85,7 @@ export default function Product({ navigation, route }: any): JSX.Element {
                         src={data.image.mobile}
                         desc={data.description}
                         navigation={navigation}
-                        link="Cart"
+                        link=""
                         slug=""
                         category="" />
                     <View style={[gStyles.margin]}>

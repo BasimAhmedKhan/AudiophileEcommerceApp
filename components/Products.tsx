@@ -2,6 +2,8 @@ import { useState } from "react";
 import Btn from "./Button";
 import { gStyles } from "./Styles";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import Toast from 'react-native-toast-message';
+import { useAuth } from "../context/AuthContext";
 
 type ProductsProps = {
     id: number
@@ -18,14 +20,16 @@ type ProductsProps = {
 
 export default function Products({ id, name, price, desc, cart, src, link, navigation, slug, category }: ProductsProps): JSX.Element {
 
-    const [counter, setCounter] = useState(0);
+    const {addProduct, increaseQuantity, decreaseQuantity, getItemQuantity} = useAuth();
 
-    const increase = () => {
-        setCounter((e) => e + 1);
-    };
-    const decrease = () => {
-        setCounter((e) => e - 1);
-    };
+    const counter = getItemQuantity(id);
+
+    const showToast = () => {
+        Toast.show({
+          type: 'success',
+          text1: 'Product Added to Cart Successfully',
+        });
+      }
 
     return (
         <View style={[gStyles.margin, gStyles.marginTB, gStyles.center]}>
@@ -39,17 +43,20 @@ export default function Products({ id, name, price, desc, cart, src, link, navig
             <View style={[gStyles.flex, gStyles.margin]}>
                 {cart ?
                     <View style={[gStyles.flex, styles.marginRight]}>
-                        <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={decrease}>
-                            <Text>-</Text>
+                        <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={() => decreaseQuantity(id)}>
+                            <Text style={[gStyles.black]}>-</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.counter, gStyles.center]}>
                             <Text style={[gStyles.black, gStyles.h3]}>{counter}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={increase}>
-                            <Text>+</Text>
+                        <TouchableOpacity style={[styles.counter, gStyles.center]} onPress={() => increaseQuantity(id)}>
+                            <Text style={[gStyles.black]}>+</Text>
                         </TouchableOpacity>
                     </View> : null}
-                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} navigation={navigation} link={link} slug={slug} category={category} size={true} />
+                <Btn text={cart ? "ADD PRODUCT" : "SEE PRODUCT"} onPress={() => {
+                    addProduct(id, name, slug, price, counter);
+                    showToast();
+                }} navigation={navigation} link={link} slug={slug} category={category} size={true} />
             </View>
         </View>
     );
